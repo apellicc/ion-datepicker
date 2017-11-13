@@ -723,7 +723,8 @@ export class DatePickerComponent {
         if (!this.config.max || this.config.max >= testDate) {
             this.tempDate = testDate;
             this.createDateList(this.tempDate);
-        }
+		}
+		this.config.ionMonthChanged.emit(testDate);
     }
 
     /**
@@ -739,7 +740,8 @@ export class DatePickerComponent {
             (this.config.min <= testDate)) {
             this.tempDate = testDate;
             this.createDateList(this.tempDate);
-        }
+		}
+		this.config.ionMonthChanged.emit(testDate);
     }
 
     /**

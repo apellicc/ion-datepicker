@@ -13,6 +13,7 @@ import { DateService } from '../services/datepicker.service';
 export class DatePickerDirective {
   @Output('ionSelected') public selected: EventEmitter<string | Date> = new EventEmitter<string | Date>();
   @Output('ionChanged') public changed: EventEmitter<string | Date> = new EventEmitter<string | Date>();
+  @Output('ionMonthChanged') public monthChanged: EventEmitter<string | Date> = new EventEmitter<string | Date>();
   @Output('ionCanceled') public canceled: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() public max: Date;
@@ -61,7 +62,8 @@ export class DatePickerDirective {
       headerClasses: this.headerClasses,
       ionChanged: this.changed,
       ionCanceled: this.canceled,
-      ionSelected: this.selected,
+	  ionSelected: this.selected,
+	  ionMonthChanged: this.monthChanged,
       date: this.value,
       okText: this.okText,
       cancelText: this.cancelText,
