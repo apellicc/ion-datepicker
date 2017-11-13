@@ -55,14 +55,7 @@ import { DateService } from '../services/datepicker.service';
             <div class="row calendar-row" *ngFor="let week of rows;let i = index;">
                 <span class="col calendar-cell"
                     *ngFor="let day of cols;let j=index;"
-                    [ngClass]="{
-                  'datepicker-date-col': getDate(i, j) !== undefined,
-                  'datepicker-selected': isSelectedDate(getDate(i, j)),
-                  'datepicker-current' : isActualDate(getDate(i, j)),
-                  'datepicker-disabled': isDisabled(getDate(i, j)),
-                  'datepicker-temp': isTempDate(getDate(i, j)),
-                  'datepicker-mark' : isMark(getDate(i, j))
-                  }"
+                    [ngClass]="getDayClasses(getDate(i, j))"
                     (tap)="selectDate(getDate(i, j))">
 					{{getDateAsDay(i, j)}}
 				</span>
@@ -499,7 +492,44 @@ export class DatePickerComponent {
     public isSelectedDate(date: Date): boolean {
         if (!date) return false;
         return this.areEqualDates(date, this.selectedDate);
-    }
+	}
+	
+	/**
+    * 
+    * @function getDateCustomClass - Checks if the date has a custom class and returns it.
+    * @param {Date} date - date to check
+    * @returns {string} 
+    * @memberof DatePickerComponent
+    */
+	public getDateCustomClass(date: Date): string {
+		if (!date) return "";
+		let dateClass = this.config.dateClasses.find(dateClassDate => this.areEqualDates(date, dateClassDate.date));
+		return dateClass ? dateClass.class : "";
+	}
+
+	// {
+	// 	'datepicker-date-col': getDate(i, j) !== undefined,
+	// 	'datepicker-selected': isSelectedDate(getDate(i, j)),
+	// 	'datepicker-current' : isActualDate(getDate(i, j)),
+	// 	'datepicker-disabled': isDisabled(getDate(i, j)),
+	// 	'datepicker-temp': isTempDate(getDate(i, j)),
+	// 	'datepicker-mark' : isMark(getDate(i, j))
+	// 	}"
+	// 	[ngClass]="getDateCustomClass(getDate(i, j))"
+
+	getDayClasses(date: Date): {} {
+		let classes = {
+			'datepicker-date-col': date !== undefined,
+			'datepicker-selected': this.isSelectedDate(date),
+			'datepicker-current' : this.isActualDate(date),
+			'datepicker-disabled': this.isDisabled(date),
+			'datepicker-temp': this.isTempDate(date),
+			'datepicker-mark' : this.isMark(date),
+			custom: true
+		}
+		classes[this.getDateCustomClass(date)] = true;
+		return classes;
+	}
 
     /**
     * 

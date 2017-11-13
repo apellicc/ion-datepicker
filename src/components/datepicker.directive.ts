@@ -39,6 +39,10 @@ export class DatePickerDirective {
   @Input() public disabledDates: Date[] = [];
   @Input() public markDates: Date[] = [];
   @Input() public calendar: boolean = true;
+  @Input() public dateClasses: {
+		date: Date,
+		class: String
+	}[]
   public modal: DatePickerDisplayer;
   private _fn: any;
   constructor(
@@ -55,6 +59,9 @@ export class DatePickerDirective {
   }
 
   public open() {
+		if (this.dateClasses && !Array.isArray(this.dateClasses)) {
+			this.dateClasses = [this.dateClasses];
+		}
     const data = <DatePickerData>{
       min: this.min,
       max: this.max,
@@ -62,14 +69,15 @@ export class DatePickerDirective {
       headerClasses: this.headerClasses,
       ionChanged: this.changed,
       ionCanceled: this.canceled,
-	  ionSelected: this.selected,
-	  ionMonthChanged: this.monthChanged,
+			ionSelected: this.selected,
+			ionMonthChanged: this.monthChanged,
       date: this.value,
       okText: this.okText,
       cancelText: this.cancelText,
       disabledDates: this.disabledDates,
       markDates: this.markDates,
-      calendar: this.calendar,
+			calendar: this.calendar,
+			dateClasses: this.dateClasses
     }
     this.modal = this.datepickerCtrl.create(data, this.modalOptions);
     this.modal.present();
