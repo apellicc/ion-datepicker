@@ -502,30 +502,27 @@ export class DatePickerComponent {
     * @memberof DatePickerComponent
     */
 	public getDateCustomClass(date: Date): string {
-		if (!date) return "";
+		if (!date || !this.config.dateClasses) return "";
 		let dateClass = this.config.dateClasses.find(dateClassDate => this.areEqualDates(date, dateClassDate.date));
 		return dateClass ? dateClass.class : "";
 	}
 
-	// {
-	// 	'datepicker-date-col': getDate(i, j) !== undefined,
-	// 	'datepicker-selected': isSelectedDate(getDate(i, j)),
-	// 	'datepicker-current' : isActualDate(getDate(i, j)),
-	// 	'datepicker-disabled': isDisabled(getDate(i, j)),
-	// 	'datepicker-temp': isTempDate(getDate(i, j)),
-	// 	'datepicker-mark' : isMark(getDate(i, j))
-	// 	}"
-	// 	[ngClass]="getDateCustomClass(getDate(i, j))"
-
-	getDayClasses(date: Date): {} {
+	
+	/**
+    * 
+    * @function getDayClasses - Return all css classes that a day can have in an ngClass-ish format
+    * @param {Date} date - date to check
+    * @returns {object} 
+    * @memberof DatePickerComponent
+    */
+	public getDayClasses(date: Date): {} {
 		let classes = {
 			'datepicker-date-col': date !== undefined,
 			'datepicker-selected': this.isSelectedDate(date),
 			'datepicker-current' : this.isActualDate(date),
 			'datepicker-disabled': this.isDisabled(date),
 			'datepicker-temp': this.isTempDate(date),
-			'datepicker-mark' : this.isMark(date),
-			custom: true
+			'datepicker-mark' : this.isMark(date)
 		}
 		classes[this.getDateCustomClass(date)] = true;
 		return classes;
