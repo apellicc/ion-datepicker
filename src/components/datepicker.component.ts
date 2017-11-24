@@ -88,10 +88,6 @@ import { DateService } from '../services/datepicker.service';
             ion-button=""
             class="button button-clear button-small col-offset-33 disable-hover button button-ios button-default button-default-ios">
             <span class="button-inner">{{config.cancelText || 'Cancel'}}</span><div class="button-effect"></div></button>
-        <button (tap)="onDone($event)"
-            ion-button=""
-            class="button button-clear button-small disable-hover button button-ios button-default button-default-ios">
-            <span class="button-inner">{{config.okText || 'OK'}}</span><div class="button-effect"></div></button>
     </div>
 </div>
     `,
@@ -551,7 +547,8 @@ export class DatePickerComponent {
         if (this.isDisabled(date)) return;
         this.tempDate = date;
         this.tempDate.setHours(0, 0, 0, 0);
-        this.config.ionSelected.emit(this.tempDate);
+		this.config.ionSelected.emit(this.tempDate);
+		this.onDone();
     }
     /**
      * 
@@ -660,7 +657,7 @@ export class DatePickerComponent {
     public setSelectedDay(day: number): void {
         this.tempDate = new Date(this.tempDate.getFullYear(), this.tempDate.getMonth(), day);
         if (this.config.calendar)
-            this.view = this.views.Calendar;
+			this.view = this.views.Calendar;
     }
 
     /**
