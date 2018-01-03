@@ -87,11 +87,11 @@ import { DateService } from '../services/datepicker.service';
         <button (tap)="onCancel($event)"
             ion-button=""
             class="button button-clear button-small col-offset-33 disable-hover button button-ios button-default button-default-ios">
-            <span class="button-inner">{{config.cancelText || 'Cancel'}}</span><div class="button-effect"></div></button>
+            <span class="button-inner">{{config.cancelText || 'Annuler'}}</span><div class="button-effect"></div></button>
         <button (tap)="onDone($event)"
             ion-button=""
             class="button button-clear button-small disable-hover button button-ios button-default button-default-ios">
-            <span class="button-inner">{{config.okText || 'OK'}}</span><div class="button-effect"></div></button>
+            <span class="button-inner">{{config.okText || 'Valider'}}</span><div class="button-effect"></div></button>
     </div>
 </div>
     `,
@@ -439,7 +439,7 @@ export class DatePickerComponent {
     * @param month - the month to test against
     */
     public testMonth(month: number): boolean {
-        if (month  === undefined) return false;
+        if (month === undefined) return false;
         let testDate = new Date(this.tempDate.getFullYear(), month, this.tempDate.getDate());
         return !this.isDisabled(testDate);
     }
@@ -450,7 +450,7 @@ export class DatePickerComponent {
     * @param month - the month to test against
     */
     public testDay(day: number): boolean {
-        if (day  === undefined) return false;
+        if (day === undefined) return false;
         let testDate = new Date(this.tempDate.getFullYear(), this.tempDate.getMonth(), day);
         return !this.isDisabled(testDate);
     }
@@ -492,8 +492,8 @@ export class DatePickerComponent {
     public isSelectedDate(date: Date): boolean {
         if (!date) return false;
         return this.areEqualDates(date, this.selectedDate);
-	}
-	
+    }
+
 	/**
     * 
     * @function getDateCustomClass - Checks if the date has a custom class and returns it.
@@ -501,13 +501,13 @@ export class DatePickerComponent {
     * @returns {string} 
     * @memberof DatePickerComponent
     */
-	public getDateCustomClass(date: Date): string {
-		if (!date || !this.config.dateClasses) return "";
-		let dateClass = this.config.dateClasses.find(dateClassDate => this.areEqualDates(date, dateClassDate.date));
-		return dateClass ? dateClass.class : "";
-	}
+    public getDateCustomClass(date: Date): string {
+        if (!date || !this.config.dateClasses) return "";
+        let dateClass = this.config.dateClasses.find(dateClassDate => this.areEqualDates(date, dateClassDate.date));
+        return dateClass ? dateClass.class : "";
+    }
 
-	
+
 	/**
     * 
     * @function getDayClasses - Return all css classes that a day can have in an ngClass-ish format
@@ -515,18 +515,18 @@ export class DatePickerComponent {
     * @returns {object} 
     * @memberof DatePickerComponent
     */
-	public getDayClasses(date: Date): {} {
-		let classes = {
-			'datepicker-date-col': date !== undefined,
-			'datepicker-selected': this.isSelectedDate(date),
-			'datepicker-current' : this.isActualDate(date),
-			'datepicker-disabled': this.isDisabled(date),
-			'datepicker-temp': this.isTempDate(date),
-			'datepicker-mark' : this.isMark(date)
-		}
-		classes[this.getDateCustomClass(date)] = true;
-		return classes;
-	}
+    public getDayClasses(date: Date): {} {
+        let classes = {
+            'datepicker-date-col': date !== undefined,
+            'datepicker-selected': this.isSelectedDate(date),
+            'datepicker-current': this.isActualDate(date),
+            'datepicker-disabled': this.isDisabled(date),
+            'datepicker-temp': this.isTempDate(date),
+            'datepicker-mark': this.isMark(date)
+        }
+        classes[this.getDateCustomClass(date)] = true;
+        return classes;
+    }
 
     /**
     * 
@@ -750,8 +750,8 @@ export class DatePickerComponent {
         if (!this.config.max || this.config.max >= testDate) {
             this.tempDate = testDate;
             this.createDateList(this.tempDate);
-		}
-		this.config.ionMonthChanged.emit(testDate);
+        }
+        this.config.ionMonthChanged.emit(testDate);
     }
 
     /**
@@ -767,8 +767,8 @@ export class DatePickerComponent {
             (this.config.min <= testDate)) {
             this.tempDate = testDate;
             this.createDateList(this.tempDate);
-		}
-		this.config.ionMonthChanged.emit(testDate);
+        }
+        this.config.ionMonthChanged.emit(testDate);
     }
 
     /**
