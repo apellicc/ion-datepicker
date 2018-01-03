@@ -55,8 +55,8 @@ import { DateService } from '../services/datepicker.service';
             <div class="row calendar-row" *ngFor="let week of rows;let i = index;">
                 <span class="col calendar-cell"
                     *ngFor="let day of cols;let j=index;"
-                    [ngClass]="getDayClasses(getDate(i, j))"
-                    (tap)="selectDate(getDate(i, j))">
+                    (tap)="selectDate(getDate(i, j))"
+                    [ngClass]="getDayClasses(getDate(i, j))">
 					{{getDateAsDay(i, j)}}
 				</span>
             </div>
@@ -551,8 +551,8 @@ export class DatePickerComponent {
         if (this.isDisabled(date)) return;
         this.tempDate = date;
         this.tempDate.setHours(0, 0, 0, 0);
-        this.config.ionSelected.emit(this.tempDate);
-        this.onDone();
+        // this.config.ionSelected.emit(this.tempDate);
+        // this.onDone();
     }
     /**
      * 
